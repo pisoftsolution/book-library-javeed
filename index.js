@@ -15,5 +15,5 @@ db.on("error",(err=>{console.log(err)}));
 db.once("open", ()=>{console.log("Connected to the server")});
 
 app.listen(8080 , ()=>{
-    console.log("server started at 8080");
+ console.log("server started at 8080");
 })

@@ -68,7 +68,7 @@ exports.getCategoryById =  ( req , res ) => {
     })
 }
 exports.getAllBooks =  ( req , res ) => {
-    Books.find({})
+    Books.find({Books})
     .then(books => {
         return res.status(200).json({ books: books })
     })
@@ -77,9 +77,9 @@ exports.getAllBooks =  ( req , res ) => {
     })
 }
 exports.getAllCategory =  ( req , res ) => {
-    Category.find({Category})
-    .then(book2 => {
-        return res.status(200).json({ Category: book2 })
+    Category.find({category})
+    .then(category => {
+        return res.status(200).json({ category: category })
     })
     .catch(err => {
         return res.status(400).json({ msg: err.message })
