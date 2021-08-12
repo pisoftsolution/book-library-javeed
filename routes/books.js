@@ -5,7 +5,7 @@ const books = require('../controllers/book');
 
 router.post('/getAllCategories' , books.getAllCategories);
 router.post('/getAllBooks' , books.getAllBooks);
-// router.get('/getBookById' ,book.getBookById);
+router.get('/getBookById' ,books.getBookById);
 // router.get('/getBooksByCategory' ,book.getBooksByCategory);
 // router.put('/addCategory' ,book.addCategory);
 // router.put('/editCategory' ,book.editCategory);
