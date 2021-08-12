@@ -1,12 +1,12 @@
-const books1 = require('../model/bookSchema');
-const books2 = require('../model/categorySchema');
+const Books = require('../model/bookSchema');
+const Category = require('../model/categorySchema');
 
-exports.getAllNames =  ( req , res ) => {
+exports.addNewCategory =  ( req , res ) => {
     // res.json(req.body); 
     if (!req.body.Name){
         res.status(400).json({msg:"This is invalid data"});
     }
-    let book2 = new books2({
+    let book2 = new Category({
         Name : req.body.Name,
     });
     book2.save()
@@ -19,12 +19,12 @@ exports.getAllNames =  ( req , res ) => {
         res.status(400).json({err});
     })
 }
-exports.getAllBooks =  ( req , res ) => {
+exports.addNewBooks = async  ( req , res ) => {
     // res.json(req.body); 
     if ( !req.body.name ||!req.body.author || !req.body.publisher || !req.body.yearPublished || !req.body.category){
         res.status(400).json({msg:"This is invalid data"});
     }
-    let book = new books1({
+    let book = new Books({
         name : req.body.name,
         author: req.body.author,
         publisher : req.body.publisher,
@@ -43,24 +43,47 @@ exports.getAllBooks =  ( req , res ) => {
 }
 exports.getBookById =  ( req , res ) => {
     // res.json(req.body); 
-    books1.findById({ ID: req.params._id })
-    if ( !req.body.name ||!req.body.author || !req.body.publisher || !req.body.yearPublished || !req.body.category){
-        res.status(400).json({msg:"This is invalid data"});
+    if (!req.query.id) {
+        return res.status(400).json({ msg: "You need to send the ID!" })
     }
-    let book = new books1({
-        name : req.body.name,
-        author: req.body.author,
-        publisher : req.body.publisher,
-        yearPublished : req.body.yearPublished,
-        category : req.body.category,
-    });
-    book.save()
-    .then(b=>{
-        if (b) {
-            res.status(200).json({b});
-        }
+    Books.find({ _id: req.query.id })
+    .then(book => {
+        return res.status(200).json({ book: book });
     })
-    .catch(err=>{
-        res.status(400).json({err});
+    .catch(err => {
+        return res.status(200).json({ msg: err.message });
     })
 }
+exports.getCategoryById =  ( req , res ) => {
+    // res.json(req.body); 
+    if (!req.query.id) {
+        return res.status(400).json({ msg: "You need to send the ID!" })
+    }
+    Category.find({ _id: req.query.id })
+    .then(book => {
+        return res.status(200).json({ book: book });
+    })
+    .catch(err => {
+        return res.status(200).json({ msg: err.message });
+    })
+}
+exports.getAllBooks =  ( req , res ) => {
+    Books.find({})
+    .then(books => {
+        return res.status(200).json({ books: books })
+    })
+    .catch(err => {
+        return res.status(400).json({ msg: err.message })
+    })
+}
+exports.getAllCategory =  ( req , res ) => {
+    Category.find({Category})
+    .then(book2 => {
+        return res.status(200).json({ Category: book2 })
+    })
+    .catch(err => {
+        return res.status(400).json({ msg: err.message })
+    })
+}
+
+
