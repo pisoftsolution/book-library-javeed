@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const BookSchema = mongoose.Schema({
-    Categories: {
+    Name: {
         type: String,
         required: true
     },    

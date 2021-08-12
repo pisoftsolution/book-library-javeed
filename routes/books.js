@@ -3,7 +3,7 @@ const router = express.Router();
 const books = require('../controllers/book');
 
 
-router.post('/getAllCategories' , books.getAllCategories);
+router.post('/getAllNames' , books.getAllNames);
 router.post('/getAllBooks' , books.getAllBooks);
 router.get('/getBookById' ,books.getBookById);
 // router.get('/getBooksByCategory' ,book.getBooksByCategory);

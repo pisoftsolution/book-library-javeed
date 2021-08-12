@@ -1,13 +1,13 @@
 const books1 = require('../model/bookSchema');
 const books2 = require('../model/categorySchema');
 
-exports.getAllCategories =  ( req , res ) => {
+exports.getAllNames =  ( req , res ) => {
     // res.json(req.body); 
-    if (!req.body.Categories){
+    if (!req.body.Name){
         res.status(400).json({msg:"This is invalid data"});
     }
     let book2 = new books2({
-        Categories : req.body.Categories,
+        Name : req.body.Name,
     });
     book2.save()
     .then(b=>{
