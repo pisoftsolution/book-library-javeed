@@ -1,13 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const authRoute = require("./routes/books");
+const bookRoute = require("./routes/books");
+const categoryRoute = require("./routes/categories");
 const app = express();
 
 const dbURI = "mongodb://localhost/authentication";
 
 app.use(express.json());
 app.use(express.urlencoded());
-app.use('/api/book',authRoute);
+app.use('/api/book',bookRoute);
+app.use('/api/category',categoryRoute);
 
 mongoose.connect( dbURI , {useNewUrlParser: true,useUnifiedTopology:true});
 const db = mongoose.connection;
