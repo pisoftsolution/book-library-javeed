@@ -38,12 +38,25 @@ exports.getBookById =  ( req , res ) => {
         return res.status(200).json({ msg: err.message });
     })
 }
-//get book by entering the category in params
+//get  book category by entering the category in params
 exports.getBookByCategory =  ( req , res ) => {
     if (!req.query.category) {
         return res.status(400).json({ msg: "You need to send the category!" })
     }
     Books.find({ category: req.query.category })
+    .then(book => {
+        return res.status(200).json({ book: book });
+    })
+    .catch(err => {
+        return res.status(200).json({ msg: err.message });
+    })
+}
+//GET BOOK BY PUBLISHER BY ENTERING THE publisher in params
+exports.getBookByPublisher =  ( req , res ) => {
+    if (!req.query.publisher) {
+        return res.status(400).json({ msg: "You need to send the publisher!" })
+    }
+    Books.find({ publisher: req.query.publisher })
     .then(book => {
         return res.status(200).json({ book: book });
     })
@@ -95,31 +108,27 @@ exports.editBookById =  ( req , res ) => {
 }
 
 exports.getBookByAuthor =  ( req , res ) => {
-    Books.find({ author: req.body.author })
-    .then(b=> {
-        return res.status(200).json({ b: b })
+    if (!req.query.author) {
+        return res.status(400).json({ msg: "You need to send the author!" })
+    }
+    Books.find({ author: req.query.author })
+    .then(book => {
+        return res.status(200).json({ book: book });
     })
     .catch(err => {
-        return res.status(400).json({ msg: err.message })
+        return res.status(200).json({ msg: err.message });
     })
 }
-exports.getBookByPublisher =  ( req , res ) => {
-    Books.find({ publisher: req.body.publisher })
-    .then(b=> {
-        return res.status(200).json({ b: b })
-    })
-    .catch(err => {
-        return res.status(400).json({ msg: err.message })
-    })
-}
-
 exports.getBookByAuthorAndYearPublished =  ( req , res ) => {
-    Books.find({ author: req.body.author, yearPublished: req.body.yearPublished })
-    .then(b=> {
-        return res.status(200).json({ b: b })
+    if (!req.query.yearPublished) {
+        return res.status(400).json({ msg: "You need to send the yearPublished!" })
+    }
+    Books.find({ yearPublished: req.query.yearPublished })
+    .then(book => {
+        return res.status(200).json({ book: book });
     })
     .catch(err => {
-        return res.status(400).json({ msg: err.message })
+        return res.status(200).json({ msg: err.message });
     })
 }
 
