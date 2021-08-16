@@ -120,7 +120,7 @@ exports.getBookByAuthor =  ( req , res ) => {
     })
 }
 exports.getBookByAuthorAndYearPublished =  ( req , res ) => {
-    if (!req.query.yearPublished) {
+    if (!req.query.yearPublished || !req.query.author) {
         return res.status(400).json({ msg: "You need to send the yearPublished!" })
     }
     Books.find({ yearPublished: req.query.yearPublished })
